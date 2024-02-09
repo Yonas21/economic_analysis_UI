@@ -32,3 +32,26 @@ export const thumbnail_stats = [
 		button: "go to complexity rankings",
 	},
 ];
+
+export const mapData = [
+	["Country", "Amount"],
+	["Kazakhstan", 200],
+	["Brazil", 400],
+	["Argentina", 400],
+	["Bolivia", 400],
+	["Peru", 400],
+	["Venezuela", 400],
+	["Colombia", 400],
+	["Mexico", 400],
+	["Saudi Arabia", 600],
+	["Ethiopia", 2000],
+	["Kenya", 2000],
+	["Uganda", 2000],
+	["South Africa", 2000],
+];
+
+export const options = {
+	colorAxis: { colors: ["rgb(148, 163, 183)", "rgb(90, 112, 140)"] },
+	datalessRegionColor: "rgb(238, 240, 243)",
+	defaultColor: "#f5f5f5",
+};
