@@ -5,19 +5,22 @@ import {
 	Box,
 	Heading,
 	Spacer,
-	ButtonGroup,
 	Button,
 	Container,
-	SimpleGrid,
 	Image,
 	Grid,
 	GridItem,
 	Text,
 	Link,
 	Stack,
+	Tabs,
+	TabList,
+	Tab,
+	TabIndicator,
 } from "@chakra-ui/react";
 import { intro_stats, thumbnail_stats } from "../data";
-import { mainBackVedio,
+import {
+	mainBackVedio,
 	vishubImage,
 	metroverseImage,
 	bloombergImage,
@@ -27,9 +30,9 @@ import { mainBackVedio,
 	BookPatternBackgroung,
 	HarvardVizHubImage,
 	Harvard_GL_logo,
-	GL_logo, } from "../data/images";
+	GL_logo,
+} from "../data/images";
 import { ArrowUpIcon } from "@chakra-ui/icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faTwitter,
 	faInstagram,
@@ -40,6 +43,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import SocialMediaIcons from "../components/SocialMediaIcons";
 import WorldMap from "../components/WorldMap";
+import CardItem from "../components/CardItem";
 
 function HomePage() {
 	const videoRefs = intro_stats.reduce((refs, _, index) => {
@@ -74,7 +78,7 @@ function HomePage() {
 				style={{
 					position: "absolute",
 					width: "100%",
-					height: "50vh", // Set the height to cover the viewport
+					height: "55vh", // Set the height to cover the viewport
 					objectFit: "cover",
 				}}
 			>
@@ -82,17 +86,41 @@ function HomePage() {
 				Your browser does not support the video tag.
 			</video>
 			<Box zIndex={1} position="relative" px={4}>
-				<Flex minWidth="max-content" alignItems="center" gap="96">
+				<Flex minWidth="max-content" alignItems="center" gap="80">
 					<Box p="2">
 						<Heading color="white" fontSize={"35px"}>
 							Economic Analytics
 						</Heading>
 					</Box>
 					<Spacer />
-					<ButtonGroup gap="2">
-						<Button colorScheme="teal">Sign Up</Button>
-						<Button colorScheme="teal">Log in</Button>
-					</ButtonGroup>
+
+					<Tabs position="relative" variant="unstyled">
+						<TabList color="white">
+							<Tab
+								paddingX={5}
+								_hover={{ borderBottom: "2px solid blue.500" }}
+							>
+								Finanicial Statistics
+							</Tab>
+							<Tab
+								paddingX={5}
+								_hover={{ borderBottom: "2px solid blue.500" }}
+							>
+								Data Visualization
+							</Tab>
+							<Tab
+								_hover={{ borderBottom: "2px solid blue.500" }}
+							>
+								Reports
+							</Tab>
+						</TabList>
+						<TabIndicator
+							mt="-1.5px"
+							height="2px"
+							bg="blue.500"
+							borderRadius="1px"
+						/>
+					</Tabs>
 				</Flex>
 				<Container centerContent>
 					<Heading color="white" fontSize="50px">
@@ -108,9 +136,9 @@ function HomePage() {
 				</Container>
 			</Box>
 			<Box>
-				<SimpleGrid columns={2} paddingX={10}>
+				<Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }} gap={6} padding={10}>
 					{intro_stats.map((item, id) => (
-						<Box
+						<GridItem
 							key={id}
 							maxW="xl"
 							borderWidth="1px"
@@ -176,63 +204,13 @@ function HomePage() {
 									</Button>
 								</Box>
 							</Box>
-						</Box>
+						</GridItem>
 					))}
 
 					{thumbnail_stats.map((item) => (
-						<Box
-							key={item.header}
-							maxW="xl"
-							borderWidth="1px"
-							borderRadius="md"
-							overflow="hidden"
-							boxShadow="rgba(0, 0, 0, 0.28) 0px 0px 9px 1px"
-							marginBottom={20}
-						>
-							<Image src={item.media} alt={item.header} />
-
-							<Box p="6">
-								<Box display="flex" alignItems="baseline">
-									<Heading
-										color="rgb(65, 85, 121)"
-										fontSize={"28px"}
-										textTransform={"uppercase"}
-										borderBottom={
-											"3px solid rgb(187, 176, 74)"
-										}
-									>
-										{item.header}
-									</Heading>
-								</Box>
-
-								<Box
-									mt="1"
-									fontWeight="semibold"
-									as="h4"
-									lineHeight="tight"
-									noOfLines={4}
-									py={4}
-								>
-									{item.detail}
-								</Box>
-
-								<Box display="flex" mt="2" textAlign="right">
-									<Button
-										ml="auto"
-										border="1px solid rgb(186, 176, 74)"
-										padding="0.5rem"
-										color="rgb(186, 176, 74)"
-										float="right"
-										borderRadius="30px"
-										textTransform="uppercase"
-									>
-										{item.button}
-									</Button>
-								</Box>
-							</Box>
-						</Box>
+						<CardItem key={item.header} item={item} />
 					))}
-				</SimpleGrid>
+				</Grid>
 			</Box>
 			<Grid
 				templateColumns="repeat(2, 1fr)"
@@ -443,12 +421,13 @@ function HomePage() {
 				<GridItem
 					maxW="lg"
 					boxShadow="rgba(0, 0, 0, 0.28) 0px 0px 9px 1px"
-					padding="10px 5px 10px 10px"					
+					padding="10px 5px 10px 10px"
 					backgroundImage={BookPatternBackgroung}
 				>
 					<Image
 						src={AtlasEconomicImage}
 						alt={"The Atlas of Economic Complexity Image"}
+						paddingTop={20}
 					/>
 
 					<Button
@@ -458,7 +437,7 @@ function HomePage() {
 						borderRadius="30px"
 						textTransform="uppercase"
 						float="right"
-						marginTop={"200px"}
+						marginTop={"100px"}
 						fontSize={"1rem"}
 						rightIcon={
 							<ArrowUpIcon
@@ -602,14 +581,44 @@ function HomePage() {
 				</GridItem>
 				<GridItem colSpan={2}>
 					<Stack spacing={3} direction="column">
-						{[faFacebookSquare,faLinkedin,faInstagram,faTwitter,faYoutube,faAppStoreIos ].map((icon, _index) =><SocialMediaIcons key={_index} icon={icon} /> )}
+						{[
+							faFacebookSquare,
+							faLinkedin,
+							faInstagram,
+							faTwitter,
+							faYoutube,
+							faAppStoreIos,
+						].map((icon, _index) => (
+							<SocialMediaIcons key={_index} icon={icon} />
+						))}
 					</Stack>
 				</GridItem>
 			</Grid>
 			<Grid>
 				<GridItem>
-					<Container backgroundColor="rgb(51, 51, 51)" color="rgb(255,255,255)" fontSize="0.85rem" textAlign="center">
-					Copyright © 2024 The President and Fellows of Harvard College | <a href="#" target="_blank" rel="noreferrer" >Privacy</a> | <a href="#" target="_blank" rel="noreferrer">Accessibility</a> | <a href="#" target="_blank" rel="noreferrer">Digital Accessibility</a> | <a href="#" target="_blank" rel="noreferrer">Report Copyright</a>
+					<Container
+						backgroundColor="rgb(51, 51, 51)"
+						color="rgb(255,255,255)"
+						fontSize="0.85rem"
+						textAlign="center"
+					>
+						Copyright © 2024 The President and Fellows of Harvard
+						College |{" "}
+						<a href="#" target="_blank" rel="noreferrer">
+							Privacy
+						</a>{" "}
+						|{" "}
+						<a href="#" target="_blank" rel="noreferrer">
+							Accessibility
+						</a>{" "}
+						|{" "}
+						<a href="#" target="_blank" rel="noreferrer">
+							Digital Accessibility
+						</a>{" "}
+						|{" "}
+						<a href="#" target="_blank" rel="noreferrer">
+							Report Copyright
+						</a>
 					</Container>
 				</GridItem>
 			</Grid>
