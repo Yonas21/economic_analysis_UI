@@ -16,7 +16,7 @@ import {
 	Tabs,
 	TabList,
 	Tab,
-	TabIndicator,
+	TabIndicator,Menu, MenuButton, MenuList, MenuItem, useBreakpointValue
 } from "@chakra-ui/react";
 import { intro_stats, thumbnail_stats } from "../data";
 import {
@@ -32,7 +32,7 @@ import {
 	Harvard_GL_logo,
 	GL_logo,
 } from "../data/images";
-import { ArrowUpIcon } from "@chakra-ui/icons";
+import { ArrowUpIcon, ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
 	faTwitter,
 	faInstagram,
@@ -46,6 +46,9 @@ import WorldMap from "../components/WorldMap";
 import CardItem from "../components/CardItem";
 
 function HomePage() {
+	const isLargerThanMd = useBreakpointValue({ base: false, md: true });
+
+	
 	const videoRefs = intro_stats.reduce((refs, _, index) => {
 		refs[index] = React.createRef();
 		return refs;
@@ -86,55 +89,53 @@ function HomePage() {
 				Your browser does not support the video tag.
 			</video>
 			<Box zIndex={1} position="relative" px={4}>
-				<Flex minWidth="max-content" alignItems="center" gap="80">
-					<Box p="2">
-						<Heading color="white" fontSize={"35px"}>
-							Economic Analytics
-						</Heading>
-					</Box>
-					<Spacer />
+      <Flex minWidth="max-content" alignItems="center" gap={isLargerThanMd ? "80" : "4"}>
+        <Box p="2">
+          <Heading color="white" fontSize={"35px"}>
+            Economic Analytics
+          </Heading>
+        </Box>
+        <Spacer />
 
-					<Tabs position="relative" variant="unstyled">
-						<TabList color="white">
-							<Tab
-								paddingX={5}
-								_hover={{ borderBottom: "2px solid blue.500" }}
-							>
-								Finanicial Statistics
-							</Tab>
-							<Tab
-								paddingX={5}
-								_hover={{ borderBottom: "2px solid blue.500" }}
-							>
-								Data Visualization
-							</Tab>
-							<Tab
-								_hover={{ borderBottom: "2px solid blue.500" }}
-							>
-								Reports
-							</Tab>
-						</TabList>
-						<TabIndicator
-							mt="-1.5px"
-							height="2px"
-							bg="blue.500"
-							borderRadius="1px"
-						/>
-					</Tabs>
-				</Flex>
-				<Container centerContent>
-					<Heading color="white" fontSize="50px">
-						THE ATLAS OF ECONOMIC COMPLEXITY
-					</Heading>
-					<Box padding="4" color="white" maxW="xl" fontSize={24}>
-						<Container>
-							{`Harvard Growth Lab’s research and data visualization
-						tool used to understand the economic dynamics and new
-						growth opportunities for every country worldwide.`}
-						</Container>
-					</Box>
-				</Container>
-			</Box>
+        {!isLargerThanMd ? (
+          <Menu>
+            <MenuButton as={Button} >
+              <HamburgerIcon/>
+            </MenuButton>
+            <MenuList color="rgb(255,255,255)">
+              <MenuItem>Financial Statistics</MenuItem>
+              <MenuItem>Data Visualization</MenuItem>
+              <MenuItem>Reports</MenuItem>
+            </MenuList>
+          </Menu>
+        ) : (
+          <Tabs position="relative" variant="unstyled">
+            <TabList color="white">
+              <Tab paddingX={5} _hover={{ borderBottom: "2px solid blue.500" }}>
+                Financial Statistics
+              </Tab>
+              <Tab paddingX={5} _hover={{ borderBottom: "2px solid blue.500" }}>
+                Data Visualization
+              </Tab>
+              <Tab _hover={{ borderBottom: "2px solid blue.500" }}>
+                Reports
+              </Tab>
+            </TabList>
+            <TabIndicator mt="-1.5px" height="2px" bg="blue.500" borderRadius="1px" />
+          </Tabs>
+        )}
+      </Flex>
+      <Container centerContent>
+        <Heading color="white" fontSize="50px">
+          THE ATLAS OF ECONOMIC COMPLEXITY
+        </Heading>
+        <Box padding="4" color="white" maxW="xl" fontSize={24}>
+          <Container>
+            {`Harvard Growth Lab’s research and data visualization tool used to understand the economic dynamics and new growth opportunities for every country worldwide.`}
+          </Container>
+        </Box>
+      </Container>
+    </Box>
 			<Box>
 				<Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }} gap={6} padding={10}>
 					{intro_stats.map((item, id) => (
@@ -213,7 +214,7 @@ function HomePage() {
 				</Grid>
 			</Box>
 			<Grid
-				templateColumns="repeat(2, 1fr)"
+				templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
 				gap={6}
 				padding={10}
 				backgroundImage={vishubImage}
@@ -261,7 +262,7 @@ function HomePage() {
 				</GridItem>
 			</Grid>
 
-			<Grid templateColumns="repeat(2, 1fr)" gap={6} padding={10}>
+			<Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }} gap={6} padding={10}>
 				<GridItem maxW="lg">
 					<Image src={metroverseImage} alt={"MetroVerse Image"} />
 
@@ -304,7 +305,7 @@ function HomePage() {
 			</Grid>
 
 			<Grid
-				templateColumns="repeat(6, 1fr)"
+				templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)', lg:'repeat(6,1fr)' }}
 				gap={10}
 				backgroundColor="rgb(90, 112, 140)"
 				color="white"
@@ -405,7 +406,7 @@ function HomePage() {
 			</Grid>
 			<WorldMap />
 			<Grid
-				templateColumns="repeat(2, 1fr)"
+				templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
 				gap={10}
 				color="white"
 				padding="20"
@@ -452,7 +453,7 @@ function HomePage() {
 				</GridItem>
 			</Grid>
 			<Grid
-				templateColumns="repeat(5, 1fr)"
+				templateColumns= {{ base: '1fr', md: 'repeat(3, 1fr)',lg:"repeat(5, 1fr)" }}
 				gap={"4rem"}
 				paddingY={10}
 				backgroundColor="rgb(230,230,230)"
@@ -580,7 +581,7 @@ function HomePage() {
 					</Stack>
 				</GridItem>
 				<GridItem colSpan={2}>
-					<Stack spacing={3} direction="column">
+					<Stack spacing={3} direction={['row','row', 'column', 'column']}>
 						{[
 							faFacebookSquare,
 							faLinkedin,
