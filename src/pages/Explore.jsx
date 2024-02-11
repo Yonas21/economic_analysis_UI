@@ -13,7 +13,7 @@ function Explore() {
                 <Box flex="1">
                     <GraphContainer />
                 </Box>
-                <Box w="500px">
+                <Box className='w-[500px]'>
                     <TabContainer />
                 </Box>
             </Flex>

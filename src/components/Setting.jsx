@@ -1,5 +1,5 @@
 import { Box, Center, Radio, RadioGroup, Stack } from "@chakra-ui/react";
-import React, { useState } from "react";
+import  { useState } from "react";
 
 const Setting = () => {
     const [selectedButton, setSelectedButton] = useState("digit1");

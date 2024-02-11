@@ -1,10 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useCallback } from "react";
 import {
-	Flex,
 	Box,
 	Heading,
-	Spacer,
 	Button,
 	Container,
 	Image,
@@ -12,11 +10,7 @@ import {
 	GridItem,
 	Text,
 	Link,
-	Stack,
-	Tabs,
-	TabList,
-	Tab,
-	TabIndicator,Menu, MenuButton, MenuList, MenuItem, useBreakpointValue
+	Stack
 } from "@chakra-ui/react";
 import { intro_stats, thumbnail_stats } from "../data";
 import {
@@ -32,7 +26,8 @@ import {
 	Harvard_GL_logo,
 	GL_logo,
 } from "../data/images";
-import { ArrowUpIcon, ChevronDownIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { useNavigate } from 'react-router-dom';
+import { ArrowUpIcon } from "@chakra-ui/icons";
 import {
 	faTwitter,
 	faInstagram,
@@ -44,11 +39,18 @@ import {
 import SocialMediaIcons from "../components/SocialMediaIcons";
 import WorldMap from "../components/WorldMap";
 import CardItem from "../components/CardItem";
+import Header from "../components/Header";
 
 function HomePage() {
-	const isLargerThanMd = useBreakpointValue({ base: false, md: true });
+	const navigate = useNavigate();
+	// const isLargerThanMd = useBreakpointValue({ base: false, md: true });
 
 	
+	const handleNavigation = (title) => {
+		if (title ==="go to explore") {	
+			navigate('/explore'); 
+		}
+  };
 	const videoRefs = intro_stats.reduce((refs, _, index) => {
 		refs[index] = React.createRef();
 		return refs;
@@ -89,7 +91,7 @@ function HomePage() {
 				Your browser does not support the video tag.
 			</video>
 			<Box zIndex={1} position="relative" px={4}>
-      <Flex minWidth="max-content" alignItems="center" gap={isLargerThanMd ? "80" : "4"}>
+      {/* <Flex minWidth="max-content" alignItems="center" gap={isLargerThanMd ? "80" : "4"}>
         <Box p="2">
           <Heading color="white" fontSize={"35px"}>
             Economic Analytics
@@ -124,7 +126,8 @@ function HomePage() {
             <TabIndicator mt="-1.5px" height="2px" bg="blue.500" borderRadius="1px" />
           </Tabs>
         )}
-      </Flex>
+      </Flex> */}
+	<Header />
       <Container centerContent>
         <Heading color="white" fontSize="50px">
           THE ATLAS OF ECONOMIC COMPLEXITY
@@ -200,6 +203,7 @@ function HomePage() {
 										float="right"
 										borderRadius="30px"
 										textTransform="uppercase"
+										onClick={() => handleNavigation(item.button)}
 									>
 										{item.button}
 									</Button>

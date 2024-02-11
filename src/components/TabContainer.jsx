@@ -1,8 +1,9 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, useColorModeValue, TabIndicator, RadioGroup, Stack, Radio,Center } from "@chakra-ui/react";
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, useColorModeValue, TabIndicator, Heading } from "@chakra-ui/react";
 
-import React, { useState } from "react";
+import  { useState } from "react";
 import SettingFooter from "./SettingFooter";
 import Setting from "./Setting";
+import Visualization from "./Visualization";
 
 const TabContainer = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -13,8 +14,8 @@ const TabContainer = () => {
   };
 
   return (
-    <Box flex="1" bg="white" mt={4} p="4" boxShadow="md" borderColor="gray.300" borderWidth="1px" position="fixed" right="0" bottom="0" width="390px" height="790px">
-      <Tabs variant="enclosed" colorScheme="teal" isFitted height="100%">
+    <Box flex="1" bg="white" mt={24} p="4" boxShadow="md" borderColor="gray.300" borderWidth="1px" position="fixed" right="0" bottom="0" width="390px" height="790px">
+      <Tabs variant="enclosed" mt={24} colorScheme="teal" isFitted height="100%">
         <TabList mb="1em" justifyContent="space-between" height="auto" colorScheme="orange">
           <Tab
             onClick={() => handleTabChange(0)}
@@ -43,7 +44,10 @@ const TabContainer = () => {
           <TabPanel>
             {selectedTab === 0 &&
               <Box mt="5">
-                Please select one:
+                <Heading textAlign="center">
+                  Please select one:
+                </Heading>
+                <Visualization/>
                 <SettingFooter />
               </Box>}
           </TabPanel>

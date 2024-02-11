@@ -1,11 +1,17 @@
 import { Box, Flex, Spacer, Image, Link } from "@chakra-ui/react";
-import React from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+			navigate('/'); 
+  };
   return (
     <Box bg="white.400" w="100%" py={2} px={4} color="white" style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)" }}>
       <Flex alignItems="center" h="100%">
-        <Box ml={8}>
+        <Box ml={8} onClick={handleNavigation}>
           <Image
             src="/src/assets/GL_logo_black.b45326f74d0a4cea0d2fbfd1e7e1c53e.png"
             alt="Website Logo"
