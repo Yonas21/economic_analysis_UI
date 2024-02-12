@@ -9,6 +9,10 @@ import BookPatternBackgroung from "../assets/book-pattern_image.1a473be97f34c4ad
 import HarvardVizHubImage from "../assets/harvard_viz_hub.png";
 import Harvard_GL_logo from "../assets/Harvard_GL_logo.83fca870dded04ce384260bb125ce260.png";
 import GL_logo from "../assets/GL_logo_black.b45326f74d0a4cea0d2fbfd1e7e1c53e.png";
+import GeoMapImage from "../assets/geomap.png";
+import GlobalshareImage from "../assets/globalshare.png";
+import OvertimeImage from "../assets/overtime.png";
+import TreemapImage from "../assets/treemap.png";
 
 export {
 	mainBackVedio,
@@ -22,4 +26,8 @@ export {
 	HarvardVizHubImage,
 	Harvard_GL_logo,
 	GL_logo,
+	GlobalshareImage,
+	GeoMapImage,
+	OvertimeImage,
+	TreemapImage,
 };
