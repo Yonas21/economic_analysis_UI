@@ -132,7 +132,7 @@ const Visualization = () => {
 									<Select
 										options={countryList}
 										isSearchable={false}
-										placeholder="Select a country..."
+										placeholder="Select Location"
 										styles={{
 											groupHeading: (provided) => ({
 												...provided,
@@ -202,6 +202,45 @@ const Visualization = () => {
 											</Box>
 										))}
 									</HStack>
+									<Box textTransform="capitalize">
+										<ButtonGroup
+											size="sm"
+											isAttached
+											variant="outline"
+											mt={3}
+										>
+											<Button
+												w={150}
+												_focus={{
+													outline: "none",
+													bg: "rgb(185,191,196)",
+												}}
+											>
+												by Product
+											</Button>
+											<Button
+												w={150}
+												_focus={{
+													outline: "none",
+													bg: "rgb(185,191,196)",
+												}}
+											>
+												By Partner
+											</Button>
+										</ButtonGroup>
+										<Select
+										options={countryList}
+										isSearchable={false}
+										placeholder="Select a product"
+										styles={{
+											groupHeading: (provided) => ({
+												...provided,
+												fontWeight: "bold",
+												paddingLeft: 10,
+											}),
+										}}
+									/>
+									</Box>
 								</Stack>
 							</TabPanel>
 							<TabPanel>
