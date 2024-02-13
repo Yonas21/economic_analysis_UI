@@ -13,6 +13,9 @@ import GeoMapImage from "../assets/geomap.png";
 import GlobalshareImage from "../assets/globalshare.png";
 import OvertimeImage from "../assets/overtime.png";
 import TreemapImage from "../assets/treemap.png";
+import ProductSpaceImage from "../assets/product_space.png";
+import RingChartImage from "../assets/ring_chart.png";
+import feasibleImage from "../assets/feasible.png";
 
 export {
 	mainBackVedio,
@@ -30,4 +33,7 @@ export {
 	GeoMapImage,
 	OvertimeImage,
 	TreemapImage,
+	ProductSpaceImage,
+	RingChartImage,
+	feasibleImage,
 };

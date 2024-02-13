@@ -7,13 +7,13 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
-	Divider,
 	Heading,
 	ButtonGroup,
 	Button,
 	HStack,
 	Image,
 	Text,
+	Container,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { continents, countries } from "countries-list";
@@ -22,8 +22,12 @@ import {
 	GeoMapImage,
 	GlobalshareImage,
 	OvertimeImage,
+	ProductSpaceImage,
+	RingChartImage,
 	TreemapImage,
+	feasibleImage,
 } from "../data/images";
+import Divider from "./Divider";
 
 const geoFilter = [
 	{
@@ -47,13 +51,35 @@ const geoFilter = [
 		alt: "GlobalshareImage",
 	},
 ];
+
+const complexityFilter = [
+	{
+		image: ProductSpaceImage,
+		title: "Product Space",
+		alt: "ProductSpaceImage",
+	},
+	{
+		image: feasibleImage,
+		title: "Feasible Opportunities",
+		alt: "feasibleImage",
+	},
+	{
+		image: RingChartImage,
+		title: "Ring Chart",
+		alt: "RingChartImage",
+	},
+];
 const Visualization = () => {
 	const [countryList, setcountryList] = useState({});
 	const [selectedId, setSelectedId] = useState(null);
-
+	const [complexity, setComplexity] = useState(null)
 	const handleClick = (id) => {
 		setSelectedId((prevId) => (prevId === id ? null : id));
 	};
+
+	const handleComplexityClick = (id) => {
+		setComplexity((prevId) => (prevId === id ? null : id));
+	}
 
 	useEffect(() => {
 		// Create an object where keys are continents and values are arrays of countries
@@ -91,10 +117,10 @@ const Visualization = () => {
 	}, []);
 
 	return (
-		<Center>
+		<Center overflowY="auto">
 			<Box>
 				<Box ml={10}>
-					<Tabs variant="unstyled" mt={10}>
+					<Tabs variant="unstyled" mt={2}>
 						<TabList>
 							<Tab
 								_selected={{
@@ -105,8 +131,9 @@ const Visualization = () => {
 									color: "rgb(58, 65, 72)",
 									bg: "rgb(185, 191, 197)",
 									padding: "0.4rem 0.6rem",
-									marginRight: "140px",
+									marginRight: "90px",
 									border: "2px solid rgb(185, 191, 197)",
+									textTransform:"uppercase"
 								}}
 							>
 								Location
@@ -121,6 +148,7 @@ const Visualization = () => {
 									bg: "rgb(185, 191, 197)",
 									paddingX: "0.4rem 0.6rem",
 									border: "2px solid rgb(185, 191, 197)",
+									textTransform:"uppercase"
 								}}
 							>
 								Product
@@ -142,11 +170,13 @@ const Visualization = () => {
 										}}
 									/>
 
-									<Divider orientation="horizontal" />
+									<Divider />
 									<Box>
 										<Heading
 											textTransform="uppercase"
 											textAlign="center"
+											color="rgb(224, 118, 66)"
+											fontWeight="400"
 										>
 											trade visualizations
 										</Heading>
@@ -229,9 +259,145 @@ const Visualization = () => {
 											</Button>
 										</ButtonGroup>
 										<Select
+											options={countryList}
+											isSearchable={false}
+											placeholder="Select a product"
+											styles={{
+												groupHeading: (provided) => ({
+													...provided,
+													fontWeight: "bold",
+													paddingLeft: 10,
+												}),
+											}}
+										/>
+									</Box>
+
+									<Divider />
+
+									<Box>
+										<Heading
+											textTransform="uppercase"
+											textAlign="center"
+											color="rgb(224, 118, 66)"
+											fontWeight="400"
+										>
+											complexity visualizations
+										</Heading>
+
+										<HStack>
+											{complexityFilter.map(
+												(data, _index) => (
+													<Box
+														key={_index}
+														w="80px"
+														h="60px"
+														borderRadius="0.5px"
+														border="1px solid rgb(185, 191, 197)"
+														bg={
+															complexity ===
+															_index
+																? "rgb(185, 191, 197)"
+																: ""
+														}
+														cursor="pointer"
+														onClick={() =>
+															handleComplexityClick(_index)
+														}
+														transition="background-color  0.2s ease-in-out"
+													>
+														<Text fontSize="0.75rem">
+															{data.title}
+														</Text>
+														<Image
+															width="36px"
+															src={data.image}
+															alt={data.alt}
+														/>
+													</Box>
+												)
+											)}
+										</HStack>
+									</Box>
+									<Divider />
+									<Box>
+										<Heading
+											textTransform="capitalize"
+											textAlign="left"
+											fontWeight="800"
+										>
+											Tree Map
+										</Heading>
+
+										<Stack>
+											<Container>
+												The Tree Map displays the
+												breakdown of exports or imports
+												by location or product, in a
+												given year.
+											</Container>
+											<a
+												href="/countries/231"
+												target="_blank"
+												style={{display:"flex", textTransform:"uppercase", fontWeight:400, border: "1px solid rgb(224, 118, 66)", padding:"1rem 1rem 1rem 0.5rem", marginBottom:"10px"}}
+											>
+												{`Explore the country's profile`}
+												<span style={{marginTop:"10px"}}>
+													<svg
+														id="__1UFlyIY__Layer_1"
+														data-name="Layer 1"
+														xmlns="http://www.w3.org/2000/svg"
+														viewBox="0 0 10.7 10.7"
+														fill="rgb(224, 118, 66)"
+														width="10px"
+													>
+														<polygon points="10.7 8.86 9.7 8.86 9.7 1 1.85 1 1.85 0 10.7 0 10.7 8.86"></polygon>
+														<rect
+															x="-1.2"
+															y="5.14"
+															width="13.93"
+															height="1"
+															transform="translate(-2.79 5.52) rotate(-45)"
+														></rect>
+													</svg>
+												</span>
+											</a>
+											<a
+												href="https://metroverse.cid.harvard.edu/?country=231"
+												target="_blank"
+												rel="noreferrer"
+												style={{display:"flex", textTransform:"uppercase", fontWeight:400, border: "1px solid rgb(224, 118, 66)", padding:"1rem 1rem 1rem 0.5rem"}}
+											>
+												{`Explore the country's cities`}
+												<span style={{marginTop:"10px"}} >
+													<svg
+														id="__1UFlyIY__Layer_1"
+														data-name="Layer 1"
+														xmlns="http://www.w3.org/2000/svg"
+														viewBox="0 0 10.7 10.7"
+														fill="rgb(224, 118, 66)"
+														width="10px"
+																					>
+														<polygon points="10.7 8.86 9.7 8.86 9.7 1 1.85 1 1.85 0 10.7 0 10.7 8.86"></polygon>
+														<rect
+															x="-1.2"
+															y="5.14"
+															width="13.93"
+															height="1"
+															transform="translate(-2.79 5.52) rotate(-45)"
+														></rect>
+													</svg>
+												</span>
+											</a>{" "}
+										</Stack>
+									</Box>
+								</Stack>
+							</TabPanel>
+							<TabPanel>
+								<Stack>
+									<Select
 										options={countryList}
 										isSearchable={false}
-										placeholder="Select a product"
+										placeholder="Select and HS good or service"
 										styles={{
 											groupHeading: (provided) => ({
 												...provided,
@@ -240,11 +406,113 @@ const Visualization = () => {
 											}),
 										}}
 									/>
+
+									<Divider />
+									<Box>
+										<Heading
+											textTransform="uppercase"
+											textAlign="center"
+											color="rgb(224, 118, 66)"
+											fontWeight="400"
+										>
+											trade visualizations
+										</Heading>
+										<ButtonGroup
+											size="sm"
+											isAttached
+											variant="outline"
+											mt={3}
+										>
+											<Button
+												w={150}
+												_focus={{
+													outline: "none",
+													bg: "rgb(185,191,196)",
+												}}
+											>
+												Exports
+											</Button>
+											<Button
+												w={150}
+												_focus={{
+													outline: "none",
+													bg: "rgb(185,191,196)",
+												}}
+											>
+												Imports
+											</Button>
+										</ButtonGroup>
+									</Box>
+									<HStack fontSize="sm">
+										{geoFilter.map((data, _index) => (
+											<Box
+												key={_index}
+												w="70px"
+												h="80px"
+												border="1px solid rgb(185, 191, 197)"
+												bg={
+													selectedId === _index
+														? "rgb(185, 191, 197)"
+														: ""
+												}
+												cursor="pointer"
+												onClick={() =>
+													handleClick(_index)
+												}
+												transition="background-color  0.2s ease-in-out"
+											>
+												<Text>{data.title}</Text>
+												<Image
+													src={data.image}
+													alt={data.alt}
+												/>
+											</Box>
+										))}
+									</HStack>
+
+									<Divider />
+									<Box>
+										<Heading
+											textTransform="capitalize"
+											textAlign="left"
+											fontWeight="800"
+										>
+											Geo Map
+										</Heading>
+
+										<Stack>
+											<Container>
+												The Geo Map displays the value of trade flows, by location or by product, in a given year. Hover on a country for more information.
+											</Container>
+											<a
+												href="/countries/231"
+												target="_blank"
+												style={{display:"flex", textTransform:"uppercase", fontWeight:400, border: "1px solid rgb(224, 118, 66)", padding:"1rem 1rem 1rem 0.5rem", marginBottom:"10px"}}
+											>
+												{`Explore the product complexity ranking(PCI)`}
+												<span style={{marginTop:"10px"}}>
+													<svg
+														id="__1UFlyIY__Layer_1"
+														data-name="Layer 1"
+														xmlns="http://www.w3.org/2000/svg"
+														viewBox="0 0 10.7 10.7"
+														fill="rgb(224, 118, 66)"
+														width="10px"
+													>
+														<polygon points="10.7 8.86 9.7 8.86 9.7 1 1.85 1 1.85 0 10.7 0 10.7 8.86"></polygon>
+														<rect
+															x="-1.2"
+															y="5.14"
+															width="13.93"
+															height="1"
+															transform="translate(-2.79 5.52) rotate(-45)"
+														></rect>
+													</svg>
+												</span>
+											</a>
+										</Stack>
 									</Box>
 								</Stack>
-							</TabPanel>
-							<TabPanel>
-								<p>two!</p>
 							</TabPanel>
 						</TabPanels>
 					</Tabs>

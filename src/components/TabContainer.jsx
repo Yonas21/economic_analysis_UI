@@ -40,7 +40,7 @@ const TabContainer = () => {
           bg="orange.500"
           borderRadius="1px"
         />
-        <TabPanels>
+        <TabPanels overflowY="scroll" overflowX="hidden" maxHeight="80vh">
           <TabPanel>
             {selectedTab === 0 &&
               <Box mt="5">

@@ -1,5 +1,6 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, useColorModeValue, TabIndicator,Flex, Text, Spacer } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { QuestionOutlineIcon, WarningTwoIcon,SunIcon } from "@chakra-ui/icons";
+import { Box, useColorModeValue, Flex, Text, Spacer } from "@chakra-ui/react";
+import  { useState } from "react";
 
 const SettingFooter = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -14,16 +15,16 @@ const SettingFooter = () => {
       <Flex className="sc-22pzk4-11 bsEIEo">
         <Box className="sc-22pzk4-13 eNgDe" mb={4}>
           <Text className="sc-22pzk4-14 fWGEjT" mb={4} color="white">
-            Guide
+            <QuestionOutlineIcon/> Guide
           </Text>
         </Box>
         <Spacer />
         <Box className="sc-22pzk4-16 gJezlk" mb={4} color="white">
-          <Text>Data Notes</Text>
+          <Text><WarningTwoIcon/> Data Notes</Text>
         </Box>
         <Spacer />
         <Box className="sc-22pzk4-17 kxXlSK" mb={4} color="white">
-          <Text>Glossary</Text>
+          <Text><SunIcon/>Glossary</Text>
         </Box>
         <Spacer />
       </Flex>
