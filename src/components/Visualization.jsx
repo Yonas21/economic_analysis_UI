@@ -308,6 +308,7 @@ const Visualization = () => {
 													textTransform: "uppercase",
 													fontWeight: 400,
 													border: "1px solid rgb(224, 118, 66)",
+													width:"90%",
 													padding:
 														"1rem 1rem 1rem 0.5rem",
 													marginBottom: "10px",
@@ -346,6 +347,7 @@ const Visualization = () => {
 													display: "flex",
 													textTransform: "uppercase",
 													fontWeight: 400,
+													width:"90%",
 													border: "1px solid rgb(224, 118, 66)",
 													padding:
 														"1rem 1rem 1rem 0.5rem",
@@ -484,8 +486,6 @@ const Visualization = () => {
 													textTransform: "uppercase",
 													fontWeight: 400,
 													border: "1px solid rgb(224, 118, 66)",
-													padding:
-														"1rem 1rem 1rem 0.5rem",
 													marginBottom: "10px",
 												}}
 											>
