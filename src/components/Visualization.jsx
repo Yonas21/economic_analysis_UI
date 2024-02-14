@@ -18,68 +18,21 @@ import {
 import { useState, useEffect } from "react";
 import { continents, countries } from "countries-list";
 import Select from "react-select";
-import {
-	GeoMapImage,
-	GlobalshareImage,
-	OvertimeImage,
-	ProductSpaceImage,
-	RingChartImage,
-	TreemapImage,
-	feasibleImage,
-} from "../data/images";
 import Divider from "./Divider";
+import { complexityFilter, geoFilter, hs_goods_data } from "../data";
 
-const geoFilter = [
-	{
-		image: TreemapImage,
-		title: "Tree Map",
-		alt: "TreemapImage",
-	},
-	{
-		image: GeoMapImage,
-		title: "Geo Map",
-		alt: "GeoMapImage",
-	},
-	{
-		image: OvertimeImage,
-		title: "Over Time",
-		alt: "OvertimeImage",
-	},
-	{
-		image: GlobalshareImage,
-		title: "Global Share",
-		alt: "GlobalshareImage",
-	},
-];
-
-const complexityFilter = [
-	{
-		image: ProductSpaceImage,
-		title: "Product Space",
-		alt: "ProductSpaceImage",
-	},
-	{
-		image: feasibleImage,
-		title: "Feasible Opportunities",
-		alt: "feasibleImage",
-	},
-	{
-		image: RingChartImage,
-		title: "Ring Chart",
-		alt: "RingChartImage",
-	},
-];
 const Visualization = () => {
 	const [countryList, setcountryList] = useState({});
 	const [selectedId, setSelectedId] = useState(null);
-	const [complexity, setComplexity] = useState(null)
+	const [complexity, setComplexity] = useState(null);
+	const [filteredHS, setfilteredHS] = useState(null);
 	const handleClick = (id) => {
 		setSelectedId((prevId) => (prevId === id ? null : id));
 	};
 
 	const handleComplexityClick = (id) => {
 		setComplexity((prevId) => (prevId === id ? null : id));
-	}
+	};
 
 	useEffect(() => {
 		// Create an object where keys are continents and values are arrays of countries
@@ -112,7 +65,17 @@ const Visualization = () => {
 			})
 		);
 
-		console.log(countriesByContinent);
+
+		const hs = hs_goods_data.map((data) => {
+			return {
+				label: `${data.name_short_en}`,
+				value: data.name_en,
+			};
+		});
+				console.log("unfiltered", hs_goods_data);
+				console.log("filteted",hs);
+
+		setfilteredHS(hs);
 		setcountryList(continentOptions);
 	}, []);
 
@@ -133,7 +96,7 @@ const Visualization = () => {
 									padding: "0.4rem 0.6rem",
 									marginRight: "90px",
 									border: "2px solid rgb(185, 191, 197)",
-									textTransform:"uppercase"
+									textTransform: "uppercase",
 								}}
 							>
 								Location
@@ -148,7 +111,7 @@ const Visualization = () => {
 									bg: "rgb(185, 191, 197)",
 									paddingX: "0.4rem 0.6rem",
 									border: "2px solid rgb(185, 191, 197)",
-									textTransform:"uppercase"
+									textTransform: "uppercase",
 								}}
 							>
 								Product
@@ -210,7 +173,7 @@ const Visualization = () => {
 										{geoFilter.map((data, _index) => (
 											<Box
 												key={_index}
-												w="70px"
+												w="80px"
 												h="80px"
 												border="1px solid rgb(185, 191, 197)"
 												bg={
@@ -224,7 +187,7 @@ const Visualization = () => {
 												}
 												transition="background-color  0.2s ease-in-out"
 											>
-												<Text>{data.title}</Text>
+												<Text fontSize="0.75rem">{data.title}</Text>
 												<Image
 													src={data.image}
 													alt={data.alt}
@@ -259,7 +222,7 @@ const Visualization = () => {
 											</Button>
 										</ButtonGroup>
 										<Select
-											options={countryList}
+											options={filteredHS}
 											isSearchable={false}
 											placeholder="Select a product"
 											styles={{
@@ -301,7 +264,9 @@ const Visualization = () => {
 														}
 														cursor="pointer"
 														onClick={() =>
-															handleComplexityClick(_index)
+															handleComplexityClick(
+																_index
+															)
 														}
 														transition="background-color  0.2s ease-in-out"
 													>
@@ -338,10 +303,22 @@ const Visualization = () => {
 											<a
 												href="/countries/231"
 												target="_blank"
-												style={{display:"flex", textTransform:"uppercase", fontWeight:400, border: "1px solid rgb(224, 118, 66)", padding:"1rem 1rem 1rem 0.5rem", marginBottom:"10px"}}
+												style={{
+													display: "flex",
+													textTransform: "uppercase",
+													fontWeight: 400,
+													border: "1px solid rgb(224, 118, 66)",
+													padding:
+														"1rem 1rem 1rem 0.5rem",
+													marginBottom: "10px",
+												}}
 											>
 												{`Explore the country's profile`}
-												<span style={{marginTop:"10px"}}>
+												<span
+													style={{
+														marginTop: "10px",
+													}}
+												>
 													<svg
 														id="__1UFlyIY__Layer_1"
 														data-name="Layer 1"
@@ -365,10 +342,21 @@ const Visualization = () => {
 												href="https://metroverse.cid.harvard.edu/?country=231"
 												target="_blank"
 												rel="noreferrer"
-												style={{display:"flex", textTransform:"uppercase", fontWeight:400, border: "1px solid rgb(224, 118, 66)", padding:"1rem 1rem 1rem 0.5rem"}}
+												style={{
+													display: "flex",
+													textTransform: "uppercase",
+													fontWeight: 400,
+													border: "1px solid rgb(224, 118, 66)",
+													padding:
+														"1rem 1rem 1rem 0.5rem",
+												}}
 											>
 												{`Explore the country's cities`}
-												<span style={{marginTop:"10px"}} >
+												<span
+													style={{
+														marginTop: "10px",
+													}}
+												>
 													<svg
 														id="__1UFlyIY__Layer_1"
 														data-name="Layer 1"
@@ -376,7 +364,7 @@ const Visualization = () => {
 														viewBox="0 0 10.7 10.7"
 														fill="rgb(224, 118, 66)"
 														width="10px"
-																					>
+													>
 														<polygon points="10.7 8.86 9.7 8.86 9.7 1 1.85 1 1.85 0 10.7 0 10.7 8.86"></polygon>
 														<rect
 															x="-1.2"
@@ -395,7 +383,7 @@ const Visualization = () => {
 							<TabPanel>
 								<Stack>
 									<Select
-										options={countryList}
+										options={filteredHS}
 										isSearchable={false}
 										placeholder="Select and HS good or service"
 										styles={{
@@ -482,15 +470,31 @@ const Visualization = () => {
 
 										<Stack>
 											<Container>
-												The Geo Map displays the value of trade flows, by location or by product, in a given year. Hover on a country for more information.
+												The Geo Map displays the value
+												of trade flows, by location or
+												by product, in a given year.
+												Hover on a country for more
+												information.
 											</Container>
 											<a
 												href="/countries/231"
 												target="_blank"
-												style={{display:"flex", textTransform:"uppercase", fontWeight:400, border: "1px solid rgb(224, 118, 66)", padding:"1rem 1rem 1rem 0.5rem", marginBottom:"10px"}}
+												style={{
+													display: "flex",
+													textTransform: "uppercase",
+													fontWeight: 400,
+													border: "1px solid rgb(224, 118, 66)",
+													padding:
+														"1rem 1rem 1rem 0.5rem",
+													marginBottom: "10px",
+												}}
 											>
 												{`Explore the product complexity ranking(PCI)`}
-												<span style={{marginTop:"10px"}}>
+												<span
+													style={{
+														marginTop: "10px",
+													}}
+												>
 													<svg
 														id="__1UFlyIY__Layer_1"
 														data-name="Layer 1"
