@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropTypes from 'prop-types';
+import { colors } from '../data';
 
 function SocialMediaIcons({icon}) {
   return (
-    <FontAwesomeIcon color="rgb(119, 119, 119)" fontSize="25px" icon={icon} />
+    <FontAwesomeIcon color={colors.white} fontSize="25px" icon={icon} />
 
   )
 }

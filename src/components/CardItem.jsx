@@ -1,5 +1,6 @@
 import { Box, Button, GridItem, Heading, Image } from '@chakra-ui/react'
 import PropTypes from 'prop-types';
+import { colors } from '../data';
 
 function CardItem({item}) {
   return (
@@ -42,9 +43,10 @@ function CardItem({item}) {
 								<Box display="flex" mt="2" textAlign="right">
 									<Button
 										ml="auto"
-										border="1px solid rgb(186, 176, 74)"
+										border={`1px solid ${colors.terracotta}`}
+										outline="none"
 										padding="0.5rem"
-										color="rgb(186, 176, 74)"
+										color={colors.light}
 										float="right"
 										borderRadius="30px"
 										textTransform="uppercase"

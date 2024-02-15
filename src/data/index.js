@@ -12,6 +12,12 @@ import {
 	feasibleImage,
 } from "./images";
 
+export const colors = {
+	terracotta: "#B55E2E",
+	light: "#f09a6c",
+	white: "#FFFFFF",
+};
+
 export const intro_stats = [
 	{
 		media: exportVideo,

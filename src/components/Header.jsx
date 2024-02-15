@@ -1,5 +1,6 @@
 import { Box, Flex, Spacer, Image, Link } from "@chakra-ui/react";
 import { useNavigate } from 'react-router-dom';
+import { colors } from "../data";
 
 
 const Header = () => {
@@ -9,7 +10,7 @@ const Header = () => {
 			navigate('/'); 
   };
   return (
-    <Box bg="white.400" w="100%" py={2} px={4} color="white" style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)" }}>
+    <Box bg={colors.terracotta}  w="100%" py={2} color={colors.white} style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)" }}>
       <Flex alignItems="center" h="100%">
         <Box ml={8} onClick={handleNavigation}>
           <Image
@@ -19,23 +20,23 @@ const Header = () => {
           />
         </Box>
         <Spacer />
-        <Box p="2" _hover={{ color: "teal", bg: "teal"}}>
-          <Link href="/home" mr={5} color="black" _hover={{ color: "white"}} height="100%">Explore</Link>
+        <Box p="2" _hover={{ color: colors.light, cursor:"pointer"}}>
+          <Link href="/home" mr={5} _hover={{color: colors.light}}  height="100%">Homepage</Link>
         </Box>
-        <Box p="2" _hover={{ color: "teal", bg: "teal"}}>
-          <Link href="/home" mr={5} color="black" _hover={{ color: "white"}} height="100%">Countries</Link>
+        <Box p="2" _hover={{ color: colors.light, cursor:"pointer"}}>
+          <Link href="/home" mr={5} _hover={{color: colors.light}} height="100%">Financial Strategies</Link>
         </Box>        
-        <Box p="2" _hover={{ color: "teal", bg: "teal"}}>
-          <Link href="/home" mr={5} color="black" _hover={{ color: "white"}} height="100%">Data</Link>
+        <Box p="2" _hover={{ color: colors.light, cursor:"pointer"}}>
+          <Link href="/home" mr={5} _hover={{color: colors.light}} height="100%">Data Visualization</Link>
         </Box>
-        <Box p="2" _hover={{ color: "teal", bg: "teal"}}>
-          <Link href="/home" mr={5} color="black" _hover={{ color: "white"}} height="100%">Learn</Link>
+        <Box p="2" _hover={{ color: colors.light, cursor:"pointer"}}>
+          <Link href="/home" mr={5} _hover={{color: colors.light}} height="100%">Reports</Link>
         </Box>
-        <Box p="2" _hover={{ color: "teal", bg: "teal"}}>
-          <Link href="/home" mr={5} color="black" _hover={{ color: "white"}} height="100%">Publications</Link>
+        <Box p="2" _hover={{ color: colors.light, cursor:"pointer"}}>
+          <Link href="/home" mr={5} _hover={{color: colors.light}} height="100%">Login</Link>
         </Box>
-        <Box p="2" _hover={{ color: "teal", bg: "teal"}}>
-          <Link href="/home" mr={5} color="black" _hover={{ color: "white"}} height="100%">About</Link>
+        <Box p="2" _hover={{ color: colors.light, cursor:"pointer"}}>
+          <Link href="/home" mr={5} _hover={{color: colors.light}} height="100%">Signup</Link>
         </Box>
       </Flex>
     </Box>

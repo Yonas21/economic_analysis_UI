@@ -12,7 +12,7 @@ import {
 	Link,
 	Stack
 } from "@chakra-ui/react";
-import { intro_stats, thumbnail_stats } from "../data";
+import { colors, intro_stats, thumbnail_stats } from "../data";
 import {
 	mainBackVedio,
 	vishubImage,
@@ -90,43 +90,7 @@ function HomePage() {
 				<source src={mainBackVedio} type="video/mp4" />
 				Your browser does not support the video tag.
 			</video>
-			<Box zIndex={1} position="relative" px={4}>
-      {/* <Flex minWidth="max-content" alignItems="center" gap={isLargerThanMd ? "80" : "4"}>
-        <Box p="2">
-          <Heading color="white" fontSize={"35px"}>
-            Economic Analytics
-          </Heading>
-        </Box>
-        <Spacer />
-
-        {!isLargerThanMd ? (
-          <Menu>
-            <MenuButton as={Button} >
-              <HamburgerIcon/>
-            </MenuButton>
-            <MenuList color="rgb(255,255,255)">
-              <MenuItem>Financial Statistics</MenuItem>
-              <MenuItem>Data Visualization</MenuItem>
-              <MenuItem>Reports</MenuItem>
-            </MenuList>
-          </Menu>
-        ) : (
-          <Tabs position="relative" variant="unstyled">
-            <TabList color="white">
-              <Tab paddingX={5} _hover={{ borderBottom: "2px solid blue.500" }}>
-                Financial Statistics
-              </Tab>
-              <Tab paddingX={5} _hover={{ borderBottom: "2px solid blue.500" }}>
-                Data Visualization
-              </Tab>
-              <Tab _hover={{ borderBottom: "2px solid blue.500" }}>
-                Reports
-              </Tab>
-            </TabList>
-            <TabIndicator mt="-1.5px" height="2px" bg="blue.500" borderRadius="1px" />
-          </Tabs>
-        )}
-      </Flex> */}
+			<Box zIndex={1} position="relative">
 	<Header />
       <Container centerContent>
         <Heading color="white" fontSize="50px">
@@ -197,9 +161,10 @@ function HomePage() {
 								<Box display="flex" mt="2" textAlign="right">
 									<Button
 										ml="auto"
-										border="1px solid rgb(186, 176, 74)"
+										border={`1px solid ${colors.terracotta}`}
+										outline="none"
 										padding="0.5rem"
-										color="rgb(186, 176, 74)"
+										color={colors.light}
 										float="right"
 										borderRadius="30px"
 										textTransform="uppercase"
@@ -230,9 +195,10 @@ function HomePage() {
 					/>
 					<Button
 						ml="auto"
-						border="1px solid rgb(186, 176, 74)"
-						padding="1.4rem 1.2rem 1.4rem 2rem"
-						color="rgb(71, 86, 109)"
+						border={`1px solid ${colors.terracotta}`}
+						outline="none"
+						padding="0.5rem"
+						color={colors.light}
 						borderRadius="30px"
 						textTransform="uppercase"
 						marginTop={10}
@@ -460,7 +426,8 @@ function HomePage() {
 				templateColumns= {{ base: '1fr', md: 'repeat(3, 1fr)',lg:"repeat(5, 1fr)" }}
 				gap={"4rem"}
 				paddingY={10}
-				backgroundColor="rgb(230,230,230)"
+				backgroundColor={colors.terracotta}
+				color={colors.white}
 				justifyContent="center"
 				paddingX="400"
 			>
@@ -563,6 +530,15 @@ function HomePage() {
 							_hover={{ textDecoration: "underline" }}
 						>
 							contact us
+						</Link>
+						<Link
+							href="#"
+							textTransform="uppercase"
+							fontSize={13}
+							fontWeight={500}
+							_hover={{ textDecoration: "underline" }}
+						>
+							faq
 						</Link>
 						<Link
 							href="#"
