@@ -18,11 +18,11 @@ function CardItem({item}) {
 							<Box p="6">
 								<Box display="flex" alignItems="baseline">
 									<Heading
-										color="rgb(65, 85, 121)"
+										color={colors.terracotta}
 										fontSize={"28px"}
 										textTransform={"uppercase"}
 										borderBottom={
-											"3px solid rgb(187, 176, 74)"
+											`3px solid ${colors.light}`
 										}
 									>
 										{item.header}

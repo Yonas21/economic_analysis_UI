@@ -137,11 +137,11 @@ function HomePage() {
 							<Box p="6">
 								<Box display="flex" alignItems="baseline">
 									<Heading
-										color="rgb(65, 85, 121)"
+										color={colors.terracotta}
 										fontSize={"28px"}
 										textTransform={"uppercase"}
 										borderBottom={
-											"3px solid rgb(187, 176, 74)"
+											`3px solid ${colors.light}`
 										}
 									>
 										{item.header}
@@ -209,7 +209,7 @@ function HomePage() {
 								color="rgb(220, 80, 82)"
 							/>
 						}
-						_hover={{ bg: "rgb(71, 86, 109)", color: "#fff" }}
+						_hover={{ bg:`${colors.light}`, color: "#fff" }}
 					>
 						go to vis hub
 					</Button>
@@ -219,7 +219,7 @@ function HomePage() {
 					lineHeight={1.7}
 					backgroundColor={"white"}
 					padding={"1.5rem 2rem"}
-					borderLeft={"4px solid rgb(187, 176, 74)"}
+					borderLeft={`4px solid ${colors.light}`}
 				>
 					<Container>
 						{`The Atlas of Economic Complexity is part of Harvard's
@@ -238,9 +238,9 @@ function HomePage() {
 
 					<Button
 						ml="auto"
-						border="1px solid rgb(186, 176, 74)"
+						border={`1px solid ${colors.terracotta}`}
 						padding="1.4rem 1.2rem 1.4rem 2rem"
-						color="rgb(71, 86, 109)"
+						color={colors.light}
 						borderRadius="30px"
 						textTransform="uppercase"
 						marginTop={10}
@@ -248,10 +248,10 @@ function HomePage() {
 						rightIcon={
 							<ArrowUpIcon
 								transform="rotate(45deg)"
-								color="rgb(220, 80, 82)"
+								color={colors.light}
 							/>
 						}
-						_hover={{ bg: "rgb(71, 86, 109)", color: "#fff" }}
+						_hover={{ bg: `${colors.light}`, color: "#fff" }}
 					>
 						go to metroverse
 					</Button>
@@ -261,7 +261,7 @@ function HomePage() {
 					lineHeight={1.7}
 					backgroundColor={"rgb(220, 223, 229)"}
 					padding={"1.5rem 2rem"}
-					borderLeft={"4px solid rgb(187, 176, 74)"}
+					borderLeft={`4px solid ${colors.light}`}
 				>
 					<Container>
 						{`Metroverse is the Growth Lab’s urban economy navigator
@@ -277,7 +277,7 @@ function HomePage() {
 			<Grid
 				templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)', lg:'repeat(6,1fr)' }}
 				gap={10}
-				backgroundColor="rgb(90, 112, 140)"
+				backgroundColor={colors.light}
 				color="white"
 				padding="20"
 			>
@@ -402,9 +402,9 @@ function HomePage() {
 					/>
 
 					<Button
-						border="1px solid rgb(186, 176, 74)"
+						border={`1px solid ${colors.terracotta}`}
 						padding="1.4rem 1.2rem 1.4rem 2rem"
-						color="rgb(71, 86, 109)"
+						color={colors.light}
 						borderRadius="30px"
 						textTransform="uppercase"
 						float="right"
@@ -413,10 +413,10 @@ function HomePage() {
 						rightIcon={
 							<ArrowUpIcon
 								transform="rotate(45deg)"
-								color="rgb(220, 80, 82)"
+								color={colors.light}
 							/>
 						}
-						_hover={{ bg: "rgb(71, 86, 109)", color: "#fff" }}
+						_hover={{ bg: `${colors.light}`, color: "#fff" }}
 					>
 						download the 2013 and 2011 editions
 					</Button>

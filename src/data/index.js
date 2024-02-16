@@ -16,6 +16,7 @@ export const colors = {
 	terracotta: "#B55E2E",
 	light: "#f09a6c",
 	white: "#FFFFFF",
+	lightgray: "#5a708c",
 };
 
 export const intro_stats = [
@@ -66,7 +67,7 @@ export const mapData = [
 ];
 
 export const options = {
-	colorAxis: { colors: ["rgb(148, 163, 183)", "rgb(90, 112, 140)"] },
+	colorAxis: { colors: [colors.light, colors.terracotta] },
 	datalessRegionColor: "rgb(238, 240, 243)",
 	defaultColor: "#f5f5f5",
 };

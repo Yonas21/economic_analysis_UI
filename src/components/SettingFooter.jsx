@@ -1,6 +1,7 @@
 import { QuestionOutlineIcon, WarningTwoIcon,SunIcon, DownloadIcon, ExternalLinkIcon, CalendarIcon } from "@chakra-ui/icons";
 import { Box, useColorModeValue, Flex, Text, Spacer } from "@chakra-ui/react";
 import  { useState } from "react";
+import { colors } from "../data";
 
 const SettingFooter = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -29,7 +30,7 @@ const SettingFooter = () => {
         <Spacer />
       </Flex>
 
-      <Flex p="4" className="sc-22pzk4-11 bsEIEo"  bg="gray.500">
+      <Flex p="4" className="sc-22pzk4-11 bsEIEo"  bg={`${colors.light}`}>
         <Box className="sc-22pzk4-13 eNgDe">
           <Text className="sc-22pzk4-14 fWGEjT" color="white">
             <QuestionOutlineIcon/> Guide
