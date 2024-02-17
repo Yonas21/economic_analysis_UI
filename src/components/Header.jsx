@@ -10,7 +10,7 @@ const Header = () => {
 			navigate('/'); 
   };
   return (
-    <Box bg={colors.terracotta}  w="100%" py={2} color={colors.white} style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)" }}>
+    <Box bg={colors.terracotta} zIndex={1}  w="100%" py={2} color={colors.white} style={{ boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)" }}>
       <Flex alignItems="center" h="100%">
         <Box ml={8} onClick={handleNavigation}>
           <Image
