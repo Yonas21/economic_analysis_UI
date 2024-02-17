@@ -33,10 +33,10 @@ const Header = () => {
           <Link href="/home" mr={5} _hover={{color: colors.light}} height="100%">Reports</Link>
         </Box>
         <Box p="2" _hover={{ color: colors.light, cursor:"pointer"}}>
-          <Link href="/home" mr={5} _hover={{color: colors.light}} height="100%">Login</Link>
+          <Link href="/register" mr={5} _hover={{color: colors.light}} height="100%">Signup</Link>
         </Box>
         <Box p="2" _hover={{ color: colors.light, cursor:"pointer"}}>
-          <Link href="/home" mr={5} _hover={{color: colors.light}} height="100%">Signup</Link>
+          <Link href="/login" mr={5} _hover={{color: colors.light}} height="100%">Login</Link>
         </Box>
       </Flex>
     </Box>
