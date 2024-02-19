@@ -14,7 +14,7 @@ const TabContainer = () => {
   };
 
   return (
-    <Box flex="1" bg="white" mt={24} p="4" boxShadow="md" borderColor="gray.300" borderWidth="1px" position="fixed" right="0" bottom="0" width="390px" height="790px">
+    <Box flex="1" bg="white" mt={36} p="4" boxShadow="md" borderColor="gray.300" borderWidth="1px" position="fixed" right="0" bottom="0" width="390px" height="790px">
       <Tabs variant="enclosed" mt={24} colorScheme="teal" isFitted height="100%">
         <TabList mb="1em" justifyContent="space-between" height="auto" colorScheme="orange">
           <Tab

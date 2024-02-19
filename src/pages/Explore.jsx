@@ -2086,6 +2086,9 @@ function Explore() {
                 <Box className='w-[500px]'>
                     <TabContainer />
                 </Box>
+                {/* <Box flex="1" onMouseMove={onMouseMove} >
+                    <LinePlot  data={data}/>
+                </Box> */}
             </Flex>
         </Flex>
     );
