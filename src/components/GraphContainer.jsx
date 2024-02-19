@@ -52,7 +52,7 @@ const GraphContainer = () => {
                     delete parent.sumOfShares;
                 });
 
-                console.log(restructuredData);
+                // console.log(restructuredData);
 
                 setLoadingStatus(false);
                 setData(restructuredData);

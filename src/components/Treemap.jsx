@@ -3,6 +3,7 @@ import { treemap, hierarchy, scaleOrdinal } from 'd3';
 import LegendIcon from './LegendIcon';
 import Tile from './Tile';
 import Tooltip from './Tooltip';
+import PropTypes from 'prop-types'
 import { Box } from '@chakra-ui/react'; // Import Chakra UI Box component for layout
 
 const Treemap = ({ data, colorData }) => {
@@ -84,3 +85,7 @@ const Treemap = ({ data, colorData }) => {
 }
 
 export default Treemap;
+Treemap.propTypes = {
+  data: PropTypes.array.isRequired, 
+  colorData: PropTypes.array.isRequired, 
+};

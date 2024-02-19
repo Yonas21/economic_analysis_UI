@@ -72,8 +72,8 @@ const Visualization = () => {
 				value: data.name_en,
 			};
 		});
-				console.log("unfiltered", hs_goods_data);
-				console.log("filteted",hs);
+				// console.log("unfiltered", hs_goods_data);
+				// console.log("filteted",hs);
 
 		setfilteredHS(hs);
 		setcountryList(continentOptions);
