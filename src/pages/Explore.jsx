@@ -8,6 +8,20 @@ import StackedAreaChart from '../components/StackedAreaChart';
 import { newData } from '../data';
 import GeoMap from '../components/GeoMap';
 import { geoData, numData } from '../data/geo_data';
+import ConnectedScatterplot from '../components/ScatterPlot';
+
+const data = [
+    {x:1, y: 90},
+    {x: 2, y: 12},
+    {x: 3, y: 34},
+    {x: 4, y: 53},
+    {x: 5, y: 52},
+    {x: 6, y: 9},
+    {x: 7, y: 18},
+    {x: 8, y: 78},
+    {x: 9, y: 28},
+    {x: 10, y: 34},
+]
 
 function Explore() {
 
@@ -35,7 +49,7 @@ function Explore() {
             <Flex justifyContent="center">
                 <Box>
                   {
-                    tab === 1 || tab > 4 ? <GraphContainer />: tab ===2 ?  <GeoMap geoData={geoData} numData={numData} width={1300} height={700} />: tab === 3 ? <StackedAreaChart data={stackedDataNew} width={1200} height={600} />:<></>}
+                    tab === 1 || tab > 4 ? <GraphContainer />: tab ===2 ?  <GeoMap geoData={geoData} numData={numData} width={1300} height={700} />: tab === 3 ? <StackedAreaChart data={stackedDataNew} width={1200} height={600} />:<ConnectedScatterplot width={1500} height={600}  data={data} />}
                 </Box>
                 <Box className='w-[500px]'>
                     <TabContainer tab = {tab} setTab = {setTab} />
