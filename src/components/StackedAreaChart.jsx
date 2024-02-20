@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import  { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
+import PropTypes from 'prop-types'
 
 const StackedAreaChart = ({ data, width, height }) => {
   const svgRef = useRef();
@@ -97,3 +98,9 @@ const StackedAreaChart = ({ data, width, height }) => {
 };
 
 export default StackedAreaChart;
+
+StackedAreaChart.propTypes = {
+  data: PropTypes.array.isRequired,
+  width: PropTypes.number.isRequired ,
+  height: PropTypes.number.isRequired ,
+};

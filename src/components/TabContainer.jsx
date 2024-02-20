@@ -4,8 +4,9 @@ import  { useState } from "react";
 import SettingFooter from "./SettingFooter";
 import Setting from "./Setting";
 import Visualization from "./Visualization";
+import PropTypes from 'prop-types'
 
-const TabContainer = () => {
+const TabContainer = ({tab, setTab}) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const activeTabBorderColor = useColorModeValue("blue.500", "blue.200");
 
@@ -47,7 +48,7 @@ const TabContainer = () => {
                 <Heading textAlign="center">
                   Please select one:
                 </Heading>
-                <Visualization/>
+                <Visualization tab = {tab} setTab = {setTab}/>
                 <SettingFooter />
               </Box>}
           </TabPanel>
@@ -64,3 +65,7 @@ const TabContainer = () => {
 };
 
 export default TabContainer;
+TabContainer.propTypes = {
+  tab: PropTypes.number.isRequired,
+  setTab: PropTypes.func.isRequired 
+};

@@ -19,15 +19,17 @@ import { useState, useEffect } from "react";
 import { continents, countries } from "countries-list";
 import Select from "react-select";
 import Divider from "./Divider";
+import PropTypes from 'prop-types'
 import { complexityFilter, geoFilter, hs_goods_data } from "../data";
 
-const Visualization = () => {
+const Visualization = ({setTab}) => {
 	const [countryList, setcountryList] = useState({});
 	const [selectedId, setSelectedId] = useState(null);
 	const [complexity, setComplexity] = useState(null);
 	const [filteredHS, setfilteredHS] = useState(null);
 	const handleClick = (id) => {
 		setSelectedId((prevId) => (prevId === id ? null : id));
+		setTab(id+1)
 	};
 
 	const handleComplexityClick = (id) => {
@@ -182,9 +184,9 @@ const Visualization = () => {
 														: ""
 												}
 												cursor="pointer"
-												onClick={() =>
+												onClick={() =>{
 													handleClick(_index)
-												}
+												}}
 												transition="background-color  0.2s ease-in-out"
 											>
 												<Text fontSize="0.75rem">{data.title}</Text>
@@ -527,3 +529,8 @@ const Visualization = () => {
 };
 
 export default Visualization;
+
+Visualization.propTypes = {
+  tab: PropTypes.number.isRequired,
+  setTab: PropTypes.func.isRequired 
+};
