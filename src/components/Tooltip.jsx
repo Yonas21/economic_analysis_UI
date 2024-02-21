@@ -2,7 +2,7 @@ import React from 'react';
 import './tooltip.css';
 
 const Tooltip = ({ tooltip }) => {
-  const formattedShare = tooltip.Share.toFixed(2);
+  const formattedShare = tooltip?.Share?.toFixed(2);
   return (
     <div className="tooltip" style={{ top: tooltip.top, left: tooltip.left }}>
       <div><strong>{tooltip.Name}</strong></div>

@@ -21,7 +21,7 @@ const Header = () => {
         </Box>
         <Spacer />
         <Box p="2" _hover={{ color: colors.light, cursor:"pointer"}}>
-          <Link href="/home" mr={5} _hover={{color: colors.light}}  height="100%">Homepage</Link>
+          <Link href="/" mr={5} _hover={{color: colors.light}}  height="100%">Homepage</Link>
         </Box>
         <Box p="2" _hover={{ color: colors.light, cursor:"pointer"}}>
           <Link href="/home" mr={5} _hover={{color: colors.light}} height="100%">Financial Strategies</Link>

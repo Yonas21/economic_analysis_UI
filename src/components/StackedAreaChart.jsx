@@ -2,7 +2,7 @@ import  { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types'
 
-const StackedAreaChart = ({ data, width, height }) => {
+const StackedAreaChart = ({ data, width, height, setTooltip, tooltip }) => {
   const svgRef = useRef();
 
   useEffect(() => {
@@ -30,6 +30,21 @@ const StackedAreaChart = ({ data, width, height }) => {
     const color = d3.scaleOrdinal(d3.schemeTableau10);
 
     const stackKeys = Object.keys(data[0]).filter(key => key !== 'date' && key !== 'total');
+    const handleMouseOver = (event, regionData) => {
+        console.log("tooltip", regionData)
+    setTooltip({
+      content: regionData?.key, 
+      visible: true,
+      left: `${event.pageX - 50}px`,
+      top: `${event.pageY - 90}px`
+    });
+  };
+
+  // Function to handle mouseout
+  const handleMouseOut = () => {
+    setTooltip({ content: '', visible: false,left: `${event.pageX - 50}px`,
+      top: `${event.pageY - 90}px` });
+  };
 
     const stack = d3
       .stack()
@@ -53,7 +68,19 @@ const StackedAreaChart = ({ data, width, height }) => {
       .attr('fill', ({ key }) => color(key))
       .attr('d', area)
       .append('title')
-      .text(d => d.key);
+      .text(d => d.key)
+      .on('mouseenter', (event, d) => {
+        console.log(d)
+        setTooltip({
+          content: d.key, // or any other details you want to show
+          visible: true,
+          left: `${event.pageX -  50}px`,
+          top: `${event.pageY -  90}px`
+        });
+      })
+      .on('mouseleave', () => {
+        setTooltip({ content: '', visible: false, left: '0px', top: '0px' });
+      });
 
     const xAxis = d3.axisBottom(x);
     svg
@@ -77,22 +104,29 @@ const StackedAreaChart = ({ data, width, height }) => {
           .attr('text-anchor', 'start')
           .text('↑'));
 
-  }, [data, width, height]);
+  }, [data, width, height,setTooltip]);
 
   return (
     <div style={{marginLeft: '-400px',marginTop: '100px', marginRight: 'auto', width: width, height: height}}>
       <svg ref={svgRef} width={width} height={height}></svg>
-      <div
-        id="tooltip"
-        style={{
-          display: 'none',
-          position: 'absolute',
-          padding: '10px',
-          background: '#fff',
-          border: '1px solid #ccc',
-          borderRadius: '5px',
-        }}
-      ></div>
+            {tooltip.visible && (
+        <div
+          id="tooltip"
+          style={{
+            display: 'block',
+            position: 'absolute',
+            left: tooltip.left,
+            top: tooltip.top,
+            padding: '10px',
+            background: '#fff',
+            border: '1px solid #ccc',
+            borderRadius: '5px',
+          }}
+        >
+          {tooltip.content}
+        </div>
+      )}
+
     </div>
   );
 };
@@ -103,4 +137,6 @@ StackedAreaChart.propTypes = {
   data: PropTypes.array.isRequired,
   width: PropTypes.number.isRequired ,
   height: PropTypes.number.isRequired ,
+  tooltip: PropTypes.object.isRequired ,
+  setTooltip: PropTypes.func.isRequired ,
 };

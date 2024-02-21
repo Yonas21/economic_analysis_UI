@@ -24,8 +24,9 @@ const data = [
 ]
 
 function Explore() {
+    const [tab, setTab] = useState(1)
+    const [tooltip, setTooltip] = useState({ content: '', visible: false });
 
-  const [tab, setTab] = useState(1)
 
     const groupedData = newData.reduce((acc, cur) => {
         const { Year, Sector, CurrentGrossExport } = cur;
@@ -49,7 +50,7 @@ function Explore() {
             <Flex justifyContent="center">
                 <Box>
                   {
-                    tab === 1 || tab > 4 ? <GraphContainer />: tab ===2 ?  <GeoMap geoData={geoData} numData={numData} width={1300} height={700} />: tab === 3 ? <StackedAreaChart data={stackedDataNew} width={1200} height={600} />:<ConnectedScatterplot width={1500} height={600}  data={data} />}
+                    tab === 1 || tab > 4 ? <GraphContainer />: tab ===2 ?  <GeoMap geoData={geoData} numData={numData} width={1300} height={700}  tooltip={tooltip} setTooltip={setTooltip}/>: tab === 3 ? <StackedAreaChart data={stackedDataNew} width={1200} height={600} tooltip={tooltip} setTooltip={setTooltip}/>:<ConnectedScatterplot width={1500} height={600}  data={data} />}
                 </Box>
                 <Box className='w-[500px]'>
                     <TabContainer tab = {tab} setTab = {setTab} />
