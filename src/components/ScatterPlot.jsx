@@ -1,70 +1,89 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import { colors } from '../data';
 
-const MARGIN = { top: 30, right: 30, bottom: 50, left: 50 };
+const MARGIN = { top:   30, right:   30, bottom:   50, left:   50 };
 
-
- const ConnectedScatterplot = ({
-  width,
-  height,
-  data,
-}) => {
-  // bounds = area inside the graph axis = calculated by substracting the margins
+const ConnectedScatterplot = ({ width, height, data }) => {
   const axesRef = useRef(null);
+  const tooltipRef = useRef(null);
   const boundsWidth = width - MARGIN.right - MARGIN.left;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 
-  // Y axis
-  const [min, max] = d3.extent(data, (d) => d.y);
-  const yScale = d3
-    .scaleLinear()
-    .domain([0, max || 0])
-    .range([boundsHeight, 0]);
+  // Calculate the domain of the scales based on all data points across all series
+  const allXValues = data.flatMap(series => series.values.map(d => d.x));
+  const allYValues = data.flatMap(series => series.values.map(d => d.y));
+  const xScale = d3.scaleLinear().domain(d3.extent(allXValues)).range([0, boundsWidth]);
+  const yScale = d3.scaleLinear().domain(d3.extent(allYValues)).range([boundsHeight,   0]);
 
-  // X axis
-  const [xMin, xMax] = d3.extent(data, (d) => d.x);
-  const xScale = d3
-    .scaleLinear()
-    .domain([0, xMax || 0])
-    .range([0, boundsWidth]);
-
-  // Render the X and Y axis using d3.js, not react
   useEffect(() => {
     const svgElement = d3.select(axesRef.current);
     svgElement.selectAll('*').remove();
+
+    // Initialize tooltip
+    const tooltip = d3.select(tooltipRef.current)
+      .style("opacity",   0)
+      .attr("class", "tooltip")
+      .style("background-color", colors.light)
+      .style("border", "solid")
+      .style("border-width", "2px")
+      .style("border-radius", "5px")
+      .style("padding", "10px");
+
+    // X axis
     const xAxisGenerator = d3.axisBottom(xScale);
     svgElement
       .append('g')
-      .attr('transform', 'translate(0,' + boundsHeight + ')')
+      .attr('transform', `translate(0,${boundsHeight})`)
       .call(xAxisGenerator);
 
+    // Y axis
     const yAxisGenerator = d3.axisLeft(yScale);
     svgElement.append('g').call(yAxisGenerator);
-  }, [xScale, yScale, boundsHeight]);
 
-  // Build the line
-  const lineBuilder = d3
-    .line()
-    .x((d) => xScale(d.x))
-    .y((d) => yScale(d.y));
-  const linePath = lineBuilder(data);
-  if (!linePath) {
-    return null;
-  }
+    // Define event handlers
+    const mouseover = (event, d) => {
+      tooltip.style("opacity",   1);
+    };
 
-  // Build the circles
-  const allCircles = data?.map((item, i) => {
-    return (
-      <circle
-        key={i}
-        cx={xScale(item.x)}
-        cy={yScale(item.y)}
-        r={4}
-        fill={'#cb1dd1'}
-      />
-    );
-  });
+    const mousemove = (event, d) => {
+      tooltip.html(`X: ${d.x}, Y: ${d.y}`)
+        .style("left", `${event.pageX +   10}px`)
+        .style("top", `${event.pageY -   28}px`);
+    };
+
+    const mouseleave = () => {
+      tooltip.style("opacity",   0);
+    };
+
+    // Attach event handlers to circles
+    svgElement.selectAll("circle")
+      .data(data.flatMap(series => series.values))
+      .join("circle")
+        .attr("cx", d => xScale(d.x))
+        .attr("cy", d => yScale(d.y))
+        .attr("r",   4)
+        .attr("fill", "#cb1dd1")
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave);
+
+    // Create a line generator
+    const lineBuilder = d3.line()
+      .x(d => xScale(d.x))
+      .y(d => yScale(d.y));
+
+    // Draw lines for each series
+    data.forEach(series => {
+      svgElement.append('path')
+        .datum(series.values)
+        .attr('fill', 'none')
+        .attr('stroke', colors.terracotta)
+        .attr('stroke-width',  2)
+        .attr('d', lineBuilder);
+    });
+  }, [xScale, yScale, boundsHeight, data]);
 
   return (
     <div>
@@ -72,32 +91,25 @@ const MARGIN = { top: 30, right: 30, bottom: 50, left: 50 };
         <g
           width={boundsWidth}
           height={boundsHeight}
-          transform={`translate(${[MARGIN.left, MARGIN.top].join(',')})`}
-        >
-          <path
-            d={linePath}
-            opacity={0.3}
-            stroke="#cb1dd1"
-            fill="none"
-            strokeWidth={2}
-          />
-          {allCircles}
-        </g>
-        <g
-          width={boundsWidth}
-          height={boundsHeight}
+          transform={`translate(${MARGIN.left},${MARGIN.top})`}
           ref={axesRef}
-          transform={`translate(${[MARGIN.left, MARGIN.top].join(',')})`}
         />
       </svg>
+      <div ref={tooltipRef}></div>
     </div>
   );
 };
 
-export default ConnectedScatterplot
 ConnectedScatterplot.propTypes = {
-  data: PropTypes.array.isRequired,
-  width: PropTypes.number.isRequired ,
-  height: PropTypes.number.isRequired ,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    values: PropTypes.arrayOf(PropTypes.shape({
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired
+    })).isRequired
+  })).isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
 };
 
+export default ConnectedScatterplot;
